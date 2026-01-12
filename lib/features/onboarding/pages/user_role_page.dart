@@ -106,7 +106,11 @@ class UserRolePage extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        context.push('/country-selection');
+                        if (controller.selectedRole.value == 'Client') {
+                          context.push('/client-dashboard');
+                        } else {
+                          context.push('/country-selection');
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF1B3B36), // Dark Green
