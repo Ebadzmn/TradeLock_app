@@ -19,4 +19,5 @@ final class AppAssets {
   static const String countryBg = 'assets/images/countryBg.png';
   static const String tradsmanBg = 'assets/images/tradsmanBg.png';
   static const String homebg = '$_basePath/home_bg.png';
+  static const String trad2bg = '$_basePath/trad2.png';
 }

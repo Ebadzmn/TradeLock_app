@@ -9,7 +9,7 @@ import 'package:tradelock_app/features/auth/pages/complete_profile_page.dart';
 import 'package:tradelock_app/features/auth/pages/congratulations_page.dart';
 import 'package:tradelock_app/features/auth/pages/subscription_page.dart';
 import 'package:tradelock_app/features/home/pages/home_page.dart';
-import 'package:tradelock_app/features/Tradsman/controller/tradesman_dashboard_page.dart';
+import 'package:tradelock_app/features/Tradsman/pages/tradesman_dashboard_page.dart';
 import 'package:tradelock_app/features/Tradsman/pages/calendar_page.dart';
 import 'package:tradelock_app/features/home/pages/client_dashboard_page.dart';
 import 'package:tradelock_app/features/home/pages/company_dashboard_page.dart';
