@@ -157,7 +157,7 @@ class TradesmanDashboardPage extends StatelessWidget {
                                   Expanded(
                                     child: _buildDashboardItem(
                                       title: 'Mileage',
-                                      // onTap: () => context.push('/mileage'), // Placeholder
+                                      onTap: () => context.push('/mileage'),
                                     ),
                                   ),
                                   const SizedBox(width: 16),

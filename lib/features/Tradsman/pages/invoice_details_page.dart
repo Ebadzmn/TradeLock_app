@@ -8,8 +8,7 @@ class InvoiceDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const Color headerBgColor = Color(0xFF23322E);
-    const Color badgeBgColor = Color(0xFFE8F5E9);
-    const Color badgeTextColor = Color(0xFF2E7D32);
+    const Color primaryTextColor = Color(0xFF1B2B27);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -18,144 +17,388 @@ class InvoiceDetailsPage extends StatelessWidget {
         showBackButton: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Invoice INV-00124',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF1B2B27),
-              ),
+            // Header Section with Logo, Invoice #, Address, and PAID Stamp
+            Stack(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Logo
+                        Container(
+                          width: 60,
+                          height: 60,
+                          decoration: const BoxDecoration(
+                            color: Color(0xFF0056D2), // Blue Logo
+                            shape: BoxShape.circle,
+                          ),
+                          alignment: Alignment.center,
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'AL',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                'PAINTING',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 8,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        // Invoice Title and Number
+                        const Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              'INVOICE',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            Text(
+                              '#1223113',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    // Company Address
+                    const Text(
+                      'AL Painting',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: primaryTextColor,
+                      ),
+                    ),
+                    const Text(
+                      '30 High Street',
+                      style: TextStyle(fontSize: 14, color: primaryTextColor),
+                    ),
+                    const Text(
+                      'Leeds',
+                      style: TextStyle(fontSize: 14, color: primaryTextColor),
+                    ),
+                    const Text(
+                      'LS1 3AA',
+                      style: TextStyle(fontSize: 14, color: primaryTextColor),
+                    ),
+                  ],
+                ),
+                // PAID Stamp (Rotated and Centered)
+                Positioned(
+                  top: 40,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: Transform.rotate(
+                      angle: -0.2,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: const Color(0xFFE57373),
+                            width: 4,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Text(
+                          'PAID',
+                          style: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.w900,
+                            color: Color(0xFFE57373),
+                            letterSpacing: 2,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 8),
-            const Text(
-              'Issued on 29 Nov 2025',
-              style: TextStyle(fontSize: 14, color: Colors.grey),
-            ),
-            const SizedBox(height: 24),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(
-                color: badgeBgColor,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Row(
-                mainAxisSize: MainAxisSize.min,
+
+            const SizedBox(height: 20),
+
+            // Dates and Balance
+            Align(
+              alignment: Alignment.centerRight,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  CircleAvatar(radius: 3, backgroundColor: badgeTextColor),
-                  SizedBox(width: 8),
-                  Text(
-                    'PAID',
+                  const Text(
+                    '1 Dec 2023',
                     style: TextStyle(
-                      color: badgeTextColor,
-                      fontSize: 12,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
+                      color: primaryTextColor,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  _buildDateRow('Payment Terms:', 'Net 45'),
+                  _buildDateRow('Due Date:', '15 Jan 2024'),
+                  _buildDateRow('Balance Due:', '£1,725.00', isBoldValue: true),
+                  const SizedBox(height: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: const Text(
+                      'Balance Due:  £1,725.00',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: primaryTextColor,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 24),
-            Row(
-              children: [
-                const Text(
-                  'Amount Due',
-                  style: TextStyle(fontSize: 14, color: Colors.grey),
-                ),
-                const SizedBox(width: 16),
-                const Text(
-                  '£ 570.00',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF1B2B27),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 32),
-            const Divider(color: Colors.black12),
-            const SizedBox(height: 24),
+
+            const SizedBox(height: 30),
+
+            // Bill To Section
             const Text(
-              'BILL TO',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey,
-              ),
+              'Bill to:',
+              style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 4),
             const Text(
               'Sarah Thompson',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF212121),
+                color: primaryTextColor,
               ),
             ),
-            const SizedBox(height: 8),
             const Text(
-              'Client\n123 Client Address St.\nLondon, UK',
-              style: TextStyle(fontSize: 14, color: Colors.grey, height: 1.5),
+              '22 Oakfield Avenue',
+              style: TextStyle(fontSize: 14, color: primaryTextColor),
             ),
-            const SizedBox(height: 32),
             const Text(
-              'PROJECT DETAILS',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey,
+              'Grimsby',
+              style: TextStyle(fontSize: 14, color: primaryTextColor),
+            ),
+            const Text(
+              'DN31 2AB',
+              style: TextStyle(fontSize: 14, color: primaryTextColor),
+            ),
+
+            const SizedBox(height: 30),
+
+            // Items Table
+            Container(
+              decoration: const BoxDecoration(
+                border: Border(bottom: BorderSide(color: Colors.grey, width: 0.5)),
+              ),
+              child: Column(
+                children: [
+                  // Table Header
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                    color: Colors.black,
+                    child: const Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: Text(
+                            'Item',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            'Quantity',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            'Rate',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Text(
+                            'Amount',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Table Row
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Expanded(
+                          flex: 3,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Business+ Monthly',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: primaryTextColor,
+                                ),
+                              ),
+                              Text(
+                                'User Licence -',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: primaryTextColor,
+                                ),
+                              ),
+                              Text(
+                                'August 2023',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Expanded(
+                          flex: 1,
+                          child: Text(
+                            '115',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 12, color: primaryTextColor),
+                          ),
+                        ),
+                        const Expanded(
+                          flex: 1,
+                          child: Text(
+                            '£15.00',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 12, color: primaryTextColor),
+                          ),
+                        ),
+                        const Expanded(
+                          flex: 2,
+                          child: Text(
+                            '£1,725.00',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: primaryTextColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 16),
-            const Text(
-              'Hallway & Lounge',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF212121),
+
+            const SizedBox(height: 20),
+
+            // Totals
+            Align(
+              alignment: Alignment.centerRight,
+              child: SizedBox(
+                width: 200,
+                child: Column(
+                  children: [
+                    _buildTotalRow('Subtotal:', '£1,725.00'),
+                    const SizedBox(height: 4),
+                    _buildTotalRow('Tax (0%):', '£0.00'),
+                    const SizedBox(height: 4),
+                    _buildTotalRow('Total:', '£1,725.00', isBold: true),
+                  ],
+                ),
               ),
             ),
-            const SizedBox(height: 8),
-            const Text(
-              'Project ID: PRJ-00124',
-              style: TextStyle(fontSize: 14, color: Colors.grey),
-            ),
-            const SizedBox(height: 32),
-            const Divider(color: Colors.black12),
-            const SizedBox(height: 24),
-            const Text(
-              'Services',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF212121),
+
+            const SizedBox(height: 40),
+
+            // Action Buttons
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF5F5F5), // Light grey background
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.print_outlined, color: Colors.black),
+                  ),
+                  Container(
+                    width: 1,
+                    height: 24,
+                    color: Colors.grey[400],
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.mail_outline, color: Colors.black),
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 24),
-            _buildServiceItem(
-              'Hallway & Lounge - Service Charge',
-              'Qty: 1  × £ 570.00',
-              '£ 570.00',
-            ),
-            const SizedBox(height: 24),
-            _buildServiceItem(
-              'Materials and Supplies',
-              'Qty: 1  × £ 0.00',
-              '£ 0.00',
-            ),
-            const SizedBox(height: 32),
-            const Divider(color: Colors.black12),
-            const SizedBox(height: 16),
-            _buildTotalRow('Subtotal', '£ 570.00', isBold: false),
-            const SizedBox(height: 12),
-            _buildTotalRow('Tax (0%)', '£ 0.00', isBold: false),
-            const SizedBox(height: 16),
-            _buildTotalRow('Total', '£ 570.00', isBold: true),
-            const SizedBox(height: 120), // Spacing for floating button
+
+            const SizedBox(height: 100), // Spacing for floating button
           ],
         ),
       ),
@@ -164,60 +407,45 @@ class InvoiceDetailsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildServiceItem(String title, String subtitle, String amount) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  Widget _buildDateRow(String label, String value, {bool isBoldValue = false}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 2),
+      child: RichText(
+        text: TextSpan(
+          style: const TextStyle(fontSize: 12, color: Colors.grey),
           children: [
-            Expanded(
-              child: Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF424242),
-                ),
-              ),
-            ),
-            Text(
-              amount,
-              style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF212121),
+            TextSpan(text: '$label '),
+            TextSpan(
+              text: value,
+              style: TextStyle(
+                fontWeight: isBoldValue ? FontWeight.bold : FontWeight.normal,
+                color: const Color(0xFF1B2B27),
               ),
             ),
           ],
         ),
-        const SizedBox(height: 8),
-        Text(
-          subtitle,
-          style: const TextStyle(fontSize: 13, color: Colors.grey),
-        ),
-      ],
+      ),
     );
   }
 
-  Widget _buildTotalRow(String label, String amount, {required bool isBold}) {
+  Widget _buildTotalRow(String label, String amount, {bool isBold = false}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           label,
           style: TextStyle(
-            fontSize: isBold ? 18 : 16,
+            fontSize: 14,
             fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-            color: isBold ? const Color(0xFF212121) : Colors.grey,
+            color: isBold ? const Color(0xFF1B2B27) : Colors.grey,
           ),
         ),
         Text(
           amount,
           style: TextStyle(
-            fontSize: isBold ? 18 : 16,
+            fontSize: 14,
             fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-            color: const Color(0xFF212121),
+            color: const Color(0xFF1B2B27),
           ),
         ),
       ],

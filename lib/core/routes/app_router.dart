@@ -1,4 +1,6 @@
 import 'package:go_router/go_router.dart';
+import 'package:tradelock_app/features/Tradsman/pages/pending_job_details_page.dart';
+import 'package:tradelock_app/features/Tradsman/pages/mileage_page.dart';
 import 'package:tradelock_app/features/onboarding/pages/onboarding_page.dart';
 import 'package:tradelock_app/features/onboarding/pages/user_role_page.dart';
 import 'package:tradelock_app/features/onboarding/pages/country_selection_page.dart';
@@ -31,6 +33,7 @@ import 'package:tradelock_app/features/profile/pages/notification_page.dart';
 import 'package:tradelock_app/features/profile/pages/faq_page.dart';
 import 'package:tradelock_app/features/profile/pages/terms_conditions_page.dart';
 import 'package:tradelock_app/features/Tradsman/pages/pay_overview_page.dart';
+import 'package:tradelock_app/features/Tradsman/pages/rate_review_page.dart';
 
 import 'package:get/get.dart';
 
@@ -118,6 +121,10 @@ class AppRouter {
         builder: (context, state) => const JobDetailsPage(),
       ),
       GoRoute(
+        path: '/pending-job-details',
+        builder: (context, state) => const PendingJobDetailsPage(),
+      ),
+      GoRoute(
         path: '/receipts',
         builder: (context, state) => const ReceiptsPage(),
       ),
@@ -161,6 +168,14 @@ class AppRouter {
       GoRoute(
         path: '/trade-chat',
         builder: (context, state) => const TradeChatPage(),
+      ),
+      GoRoute(
+        path: '/mileage',
+        builder: (context, state) => const MileagePage(),
+      ),
+      GoRoute(
+        path: '/rate-review',
+        builder: (context, state) => const RateReviewPage(),
       ),
     ],
   );

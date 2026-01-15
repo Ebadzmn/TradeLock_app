@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tradelock_app/core/widgets/common_app_bar.dart';
+import 'package:tradelock_app/features/Tradsman/widgets/traders_bottom_nav_bar.dart';
 
 class TradeChatPage extends StatelessWidget {
   const TradeChatPage({super.key});
@@ -161,9 +162,11 @@ class TradeChatPage extends StatelessWidget {
               },
             ),
           ),
-          _buildInputBar(sendButtonColor),
         ],
       ),
+      bottomNavigationBar: _buildInputBar(sendButtonColor),
+      floatingActionButton: const TradersBottomNavBar(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 

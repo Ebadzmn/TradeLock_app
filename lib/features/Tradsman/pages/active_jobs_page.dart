@@ -12,7 +12,7 @@ class ActiveJobsPage extends StatelessWidget {
     const Color accentColor = Color(0xFFFDD835); // Yellow indicator
 
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: const CommonAppBar(
@@ -44,6 +44,7 @@ class ActiveJobsPage extends StatelessWidget {
                 tabs: [
                   Tab(text: 'All'),
                   Tab(text: 'Active jobs'),
+                  Tab(text: 'Pending'),
                   Tab(text: 'Completed jobs'),
                 ],
               ),
@@ -55,6 +56,7 @@ class ActiveJobsPage extends StatelessWidget {
                 children: [
                   _buildJobsList('All'),
                   _buildJobsList('Active'),
+                  _buildPendingJobsList(),
                   _buildJobsList('Completed'),
                 ],
               ),
@@ -64,6 +66,182 @@ class ActiveJobsPage extends StatelessWidget {
         floatingActionButton: const TradersBottomNavBar(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
+    );
+  }
+
+  Widget _buildPendingJobsList() {
+    return ListView.builder(
+      padding: const EdgeInsets.all(16.0),
+      itemCount: 2, // Mocking 2 pending items as per design
+      itemBuilder: (context, index) {
+        return Container(
+          margin: const EdgeInsets.only(bottom: 16),
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: Colors.grey.withValues(alpha: 0.2)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Images Row
+              Row(
+                children: [
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: AspectRatio(
+                        aspectRatio: 4 / 3,
+                        child: Image.network(
+                          'https://picsum.photos/seed/${index}a/400/300', // Placeholder
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) => Container(
+                            color: Colors.grey[300],
+                            child: const Icon(Icons.image, color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: AspectRatio(
+                        aspectRatio: 4 / 3,
+                        child: Image.network(
+                          'https://picsum.photos/seed/${index}b/400/300', // Placeholder
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) => Container(
+                            color: Colors.grey[300],
+                            child: const Icon(Icons.image, color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+
+              // Title
+              const Text(
+                'Lay Floor Tiles',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1B3B36),
+                ),
+              ),
+              const SizedBox(height: 8),
+
+              // Description
+              const Text(
+                'Ceramic tile installation in kitchen, approximately 20 square meters.',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey,
+                  height: 1.4,
+                ),
+              ),
+              const SizedBox(height: 12),
+
+              // Sent by info
+              Row(
+                children: [
+                  Icon(
+                    Icons.radio_button_checked,
+                    size: 16,
+                    color: Colors.grey[600],
+                  ),
+                  const SizedBox(width: 6),
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+                      children: const [
+                        TextSpan(text: 'Sent by: '),
+                        TextSpan(
+                          text: 'Grimsby Tile Co.',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        TextSpan(text: ' 1 hour ago'),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+
+              // Status Badge
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF9EDB3), // Light yellow bg
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.lock_outline, // Using lock icon as placeholder for bag/lock
+                      color: Color(0xFF5D4037),
+                      size: 20,
+                    ),
+                    const SizedBox(width: 12),
+                    const Text(
+                      'Awaiting your acceptance',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF5D4037),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // View Button
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () => context.push('/pending-job-details'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF2F3E38), // Dark Green
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 0,
+                  ),
+                  child: const Text(
+                    'View',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -120,10 +298,10 @@ class ActiveJobsPage extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: Colors.black.withOpacity(0.1)),
+            border: Border.all(color: Colors.black.withValues(alpha: 0.1)),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.02),
+                color: Colors.black.withValues(alpha: 0.02),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
@@ -180,7 +358,7 @@ class ActiveJobsPage extends StatelessWidget {
                 '${isComplete ? 'Payment: ' : 'Escrow balance: '}${job['balance']}',
                 style: TextStyle(
                   fontSize: 14,
-                  color: Colors.black.withOpacity(0.6),
+                  color: Colors.black.withValues(alpha: 0.6),
                 ),
               ),
               const SizedBox(height: 16),
@@ -217,7 +395,7 @@ class ActiveJobsPage extends StatelessWidget {
                       child: SizedBox(
                         height: 54,
                         child: OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () => context.push('/rate-review'),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: const Color(0xFF1B3B36),
                             side: const BorderSide(

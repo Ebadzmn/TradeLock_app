@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:tradelock_app/core/widgets/common_app_bar.dart';
+import 'package:tradelock_app/features/Tradsman/widgets/traders_bottom_nav_bar.dart';
 
 class PayOverviewPage extends StatelessWidget {
   const PayOverviewPage({super.key});
@@ -189,9 +190,12 @@ class PayOverviewPage extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 100),
           ],
         ),
       ),
+      floatingActionButton: const TradersBottomNavBar(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
