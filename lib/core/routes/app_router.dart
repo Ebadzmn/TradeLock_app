@@ -13,8 +13,15 @@ import 'package:tradelock_app/features/auth/pages/subscription_page.dart';
 import 'package:tradelock_app/features/home/pages/home_page.dart';
 import 'package:tradelock_app/features/Tradsman/pages/tradesman_dashboard_page.dart';
 import 'package:tradelock_app/features/Tradsman/pages/calendar_page.dart';
-import 'package:tradelock_app/features/home/pages/client_dashboard_page.dart';
-import 'package:tradelock_app/features/home/pages/company_dashboard_page.dart';
+import 'package:tradelock_app/features/client/pages/client_dashboard_page.dart';
+import 'package:tradelock_app/features/client/pages/my_job_listings_page.dart';
+import 'package:tradelock_app/features/client/pages/add_listing_page.dart';
+import 'package:tradelock_app/features/client/pages/client_active_jobs_page.dart';
+import 'package:tradelock_app/features/client/pages/client_chat_page.dart';
+import 'package:tradelock_app/features/client/pages/client_job_details_page.dart';
+import 'package:tradelock_app/features/company/pages/company_dashboard_page.dart';
+import 'package:tradelock_app/features/client/pages/tradesman_public_profile_page.dart';
+import 'package:tradelock_app/features/client/pages/release_payment_page.dart';
 import 'package:tradelock_app/features/profile/pages/profile_page.dart';
 import 'package:tradelock_app/features/Tradsman/pages/add_job_page.dart';
 import 'package:tradelock_app/features/Tradsman/pages/community_fund_page.dart';
@@ -87,6 +94,42 @@ class AppRouter {
       GoRoute(
         path: '/client-dashboard',
         builder: (context, state) => const ClientDashboardPage(),
+      ),
+      GoRoute(
+        path: '/my-job-listings',
+        builder: (context, state) => const MyJobListingsPage(),
+      ),
+      GoRoute(
+        path: '/add-listing',
+        builder: (context, state) => const AddListingPage(),
+      ),
+      GoRoute(
+        path: '/edit-listing',
+        builder: (context, state) => const AddListingPage(isEditing: true),
+      ),
+      GoRoute(
+        path: '/client-active-jobs',
+        builder: (context, state) => const ClientActiveJobsPage(),
+      ),
+      GoRoute(
+        path: '/client-job-details',
+        builder: (context, state) => const ClientJobDetailsPage(),
+      ),
+      GoRoute(
+        path: '/release-payment',
+        builder: (context, state) => const ReleasePaymentPage(),
+      ),
+      GoRoute(
+        path: '/tradesman-public-profile',
+        builder: (context, state) => const TradesmanPublicProfilePage(),
+      ),
+      GoRoute(
+        path: '/client-chat',
+        builder: (context, state) => const ClientChatPage(),
+      ),
+      GoRoute(
+        path: '/company-dashboard',
+        builder: (context, state) => const CompanyDashboardPage(),
       ),
       GoRoute(
         path: '/company-dashboard',

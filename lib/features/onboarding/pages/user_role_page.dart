@@ -107,7 +107,9 @@ class UserRolePage extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         if (controller.selectedRole.value == 'Client') {
-                          context.push('/client-dashboard');
+                          context.go('/client-dashboard');
+                        } else if (controller.selectedRole.value == 'Company') {
+                          context.go('/company-dashboard');
                         } else {
                           context.push('/country-selection');
                         }
