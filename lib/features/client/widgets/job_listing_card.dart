@@ -156,7 +156,7 @@ class JobListingCard extends StatelessWidget {
                 ),
                 const Spacer(),
 
-                _buildActionButton('Review Extra'),
+               
                 const SizedBox(width: 8),
                 _buildActionButton('View Bids', onTap: onViewBidsTap),
                 const SizedBox(width: 8),

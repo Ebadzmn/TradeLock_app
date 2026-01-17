@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:tradelock_app/features/Tradsman/pages/pending_job_details_page.dart';
 import 'package:tradelock_app/features/Tradsman/pages/mileage_page.dart';
+import 'package:tradelock_app/features/Tradsman/pages/set_tax_page.dart';
 import 'package:tradelock_app/features/onboarding/pages/onboarding_page.dart';
 import 'package:tradelock_app/features/onboarding/pages/user_role_page.dart';
 import 'package:tradelock_app/features/onboarding/pages/country_selection_page.dart';
@@ -19,6 +20,8 @@ import 'package:tradelock_app/features/client/pages/add_listing_page.dart';
 import 'package:tradelock_app/features/client/pages/client_active_jobs_page.dart';
 import 'package:tradelock_app/features/client/pages/client_chat_page.dart';
 import 'package:tradelock_app/features/client/pages/client_job_details_page.dart';
+import 'package:tradelock_app/features/client/pages/client_pending_job_details_page.dart';
+import 'package:tradelock_app/features/client/pages/client_view_bids_page.dart';
 import 'package:tradelock_app/features/company/pages/company_dashboard_page.dart';
 import 'package:tradelock_app/features/client/pages/tradesman_public_profile_page.dart';
 import 'package:tradelock_app/features/client/pages/release_payment_page.dart';
@@ -109,11 +112,23 @@ class AppRouter {
       ),
       GoRoute(
         path: '/client-active-jobs',
-        builder: (context, state) => const ClientActiveJobsPage(),
+        builder: (context, state) {
+          final initialIndex = state.extra as int? ?? 1;
+          return ClientActiveJobsPage(initialIndex: initialIndex);
+        },
       ),
+
       GoRoute(
         path: '/client-job-details',
         builder: (context, state) => const ClientJobDetailsPage(),
+      ),
+      GoRoute(
+        path: "/client-pending-job-details" , 
+      builder: (context, state) => ClientPendingJobDetailsPage(),
+      ),
+      GoRoute(
+        path: '/client-view-bids',
+        builder: (context, state) => const ClientViewBidsPage(),
       ),
       GoRoute(
         path: '/release-payment',
@@ -207,6 +222,10 @@ class AppRouter {
       GoRoute(
         path: '/pay-overview',
         builder: (context, state) => const PayOverviewPage(),
+      ),
+      GoRoute(
+        path: '/set-tax',
+        builder: (context, state) => const SetTaxPage(),
       ),
       GoRoute(
         path: '/trade-chat',

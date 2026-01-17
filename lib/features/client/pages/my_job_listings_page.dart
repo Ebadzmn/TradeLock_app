@@ -45,7 +45,7 @@ class MyJobListingsPage extends StatelessWidget {
               listedTime: '2d ago',
               imagePath: AppAssets.clientdeshboard,
               onEditTap: () => context.push('/edit-listing'),
-              onViewBidsTap: () => context.push('/client-job-details'),
+              onViewBidsTap: () => context.push('/client-view-bids'),
             ),
             JobListingCard(
               title: 'Garden Landscaping',
@@ -55,7 +55,7 @@ class MyJobListingsPage extends StatelessWidget {
               offers: 4,
               listedTime: '2d ago',
               imagePath: AppAssets.clientdeshboard,
-              onViewBidsTap: () => context.push('/client-job-details'),
+              onViewBidsTap: () => context.push('/client-view-bids'),
             ),
 
             const SizedBox(height: 20),

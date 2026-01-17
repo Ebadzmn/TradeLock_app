@@ -41,17 +41,20 @@ class ClientDashboardPage extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: _buildStatCard(
-                          icon: Icons.access_time,
-                          label: 'Pending Jobs',
-                          count: '1',
-                          countBgColor: const Color(0xFFECD033),
+                        child: GestureDetector(
+                          onTap: () => context.push('/client-active-jobs', extra: 2),
+                          child: _buildStatCard(
+                            icon: Icons.access_time,
+                            label: 'Pending Jobs',
+                            count: '1',
+                            countBgColor: const Color(0xFFECD033),
+                          ),
                         ),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
                         child: GestureDetector(
-                          onTap: () => context.push('/client-active-jobs'),
+                          onTap: () => context.push('/client-active-jobs', extra: 1),
                           child: _buildStatCard(
                             icon: Icons.work_outline,
                             label: 'Active Jobs',
@@ -76,10 +79,13 @@ class ClientDashboardPage extends StatelessWidget {
                       ),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: _buildStatCard(
-                          icon: Icons.check_box_outlined,
-                          label: 'Completed Jobs',
-                          count: '3',
+                        child: GestureDetector(
+                          onTap: () => context.push('/client-active-jobs', extra: 3),
+                          child: _buildStatCard(
+                            icon: Icons.check_box_outlined,
+                            label: 'Completed Jobs',
+                            count: '3',
+                          ),
                         ),
                       ),
                     ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:go_router/go_router.dart';
 import 'package:tradelock_app/core/widgets/common_app_bar.dart';
 import 'package:tradelock_app/features/Tradsman/widgets/traders_bottom_nav_bar.dart';
 
@@ -61,7 +62,9 @@ class PayOverviewPage extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
+
+
 
             // Breakdown Card
             Container(
@@ -164,6 +167,7 @@ class PayOverviewPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              
                             ],
                           ),
                         ),
@@ -190,7 +194,31 @@ class PayOverviewPage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 100),
+            const SizedBox(height: 20),
+                        // Set Tex Button
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () => context.push('/set-tax'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF1B3B36),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  elevation: 0,
+                ),
+                child: const Text(
+                  'Set Tex',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
           ],
         ),
       ),
