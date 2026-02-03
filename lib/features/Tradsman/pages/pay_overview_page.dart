@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-import 'package:go_router/go_router.dart';
+
 import 'package:tradelock_app/core/widgets/common_app_bar.dart';
 import 'package:tradelock_app/features/Tradsman/widgets/traders_bottom_nav_bar.dart';
 
@@ -11,214 +11,288 @@ class PayOverviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     const Color headerBgColor = Color(0xFF23322E);
 
+    // Colors extracted from image
+    const Color incomeCardColor = Color(0xFF53645D);
+    const Color expensesCardColor = Color(0xFFFFF9E6);
+    const Color expensesTextColor = Color(0xFF996515); // Gold/Brown
+
+    // Data
+    const double totalExpenses = 23460;
+
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
+      backgroundColor: Colors.white,
       appBar: const CommonAppBar(
         backgroundColor: headerBgColor,
         showBackButton: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
         child: Column(
           children: [
             // Date Range Selector
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.black12),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Apr 2024 - Mar 2024',
-                    style: TextStyle(fontSize: 16, color: Color(0xFF455A64)),
+                border: Border.all(color: Colors.grey.shade200),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 5,
+                    offset: Offset(0, 2),
                   ),
-                  const Icon(Icons.expand_more, color: Colors.grey),
+                ],
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Apr 2024 - Mar 2024',
+                    style: TextStyle(fontSize: 14, color: Color(0xFF455A64)),
+                  ),
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
 
             // Summary Cards
             Row(
               children: [
                 Expanded(
-                  child: _buildSummaryCard(
-                    'Total Income',
-                    '£72,500.00',
-                    const Color(0xFF263238),
+                  child: _buildIncomeCard(
+                    amount: '£75,000',
+                    color: incomeCardColor,
                   ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
-                  child: _buildSummaryCard(
-                    'Total Expense',
-                    '£28,300.00',
-                    const Color(0xFF263238),
+                  child: _buildExpenseCard(
+                    amount: '£23,460',
+                    bgColor: expensesCardColor,
+                    textColor: expensesTextColor,
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 24),
 
-
-
-            // Breakdown Card
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 10,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+            // Charts Section
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Donut Chart
+                Expanded(
+                  child: Column(
                     children: [
-                      // Legend
-                      Expanded(
-                        flex: 3,
-                        child: Column(
+                      SizedBox(
+                        height: 160,
+                        width: 160,
+                        child: Stack(
+                          alignment: Alignment.center,
                           children: [
-                            _buildLegendItem(
-                              'Materials',
-                              '£11,200',
-                              const Color(0xFF5C6BC0),
+                            CustomPaint(
+                              size: const Size(160, 160),
+                              painter: DonutChartPainter(
+                                data: [
+                                  ChartData(
+                                    const Color(0xFF6E8CB6),
+                                    9260,
+                                  ), // Materials - Blue
+                                  ChartData(
+                                    const Color(0xFFFFD54F),
+                                    4250,
+                                  ), // Fuel - Yellow
+                                  ChartData(
+                                    const Color(0xFFB39DDB),
+                                    2400,
+                                  ), // Tools - Purple
+                                  ChartData(
+                                    const Color(0xFF80CBC4),
+                                    2180,
+                                  ), // Mileage - Teal
+                                  ChartData(
+                                    const Color(0xFF6A8A82),
+                                    3900,
+                                  ), // Subcontractors - Greenish
+                                  ChartData(
+                                    const Color(0xFFE6C17B),
+                                    1470,
+                                  ), // Other - Beige
+                                ],
+                                strokeWidth: 40,
+                              ),
                             ),
-                            _buildLegendItem(
-                              'Fuel',
-                              '£4,150',
-                              const Color(0xFFFFCA28),
-                            ),
-                            _buildLegendItem(
-                              'Tools',
-                              '£3,000',
-                              const Color(0xFFFF7043),
-                            ),
-                            _buildLegendItem(
-                              'Mileage',
-                              '£2,450',
-                              const Color(0xFFAB47BC),
-                            ),
-                            _buildLegendItem(
-                              'Subcontractors',
-                              '£5,500',
-                              const Color(0xFF66BB6A),
-                            ),
-                            _buildLegendItem(
-                              'Other',
-                              '£2,000',
-                              const Color(0xFFFFA726),
+                            const Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'Total Expenses',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                Text(
+                                  '£23,460',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF263238),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
                       ),
-                      // Chart
-                      Expanded(
-                        flex: 4,
-                        child: Center(
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              SizedBox(
-                                width: 180,
-                                height: 180,
-                                child: CustomPaint(
-                                  painter: DonutChartPainter(
-                                    data: [
-                                      ChartData(const Color(0xFF5C6BC0), 11200),
-                                      ChartData(const Color(0xFFFFCA28), 4150),
-                                      ChartData(const Color(0xFFFF7043), 3000),
-                                      ChartData(const Color(0xFFAB47BC), 2450),
-                                      ChartData(const Color(0xFF66BB6A), 5500),
-                                      ChartData(const Color(0xFFFFA726), 2000),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 16),
+                // Bar Chart
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Income vs Expenses',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Color(0xFF546E7A),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Y-Axis Labels
+                          SizedBox(
+                            height: 135,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: const [
+                                Text(
+                                  '£80k',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                Text(
+                                  '£60k',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                Text(
+                                  '£40k',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                Text(
+                                  '£20k',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                Text(
+                                  '£0k',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          // Chart Area + X-Labels
+                          Expanded(
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 135,
+                                  child: Stack(
+                                    children: [
+                                      // Grid Lines
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: List.generate(5, (index) {
+                                          return Container(
+                                            height: 1,
+                                            color: Colors.grey.withOpacity(0.1),
+                                          );
+                                        }),
+                                      ),
+                                      // Bars
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          _buildBar(
+                                            amount: '£80k',
+                                            heightFactor: 1.0,
+                                            color: Colors.black,
+                                            availableHeight: 135,
+                                          ),
+                                          _buildBar(
+                                            amount: '£23k',
+                                            heightFactor: totalExpenses / 80000,
+                                            color: Colors.black,
+                                            availableHeight: 135,
+                                          ),
+                                        ],
+                                      ),
                                     ],
                                   ),
                                 ),
-                              ),
-                              const Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'Total Expenses',
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      color: Colors.grey,
+                                const SizedBox(height: 8),
+                                // X-Axis Labels
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: const [
+                                    Text(
+                                      'Income',
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.grey,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    '£28,300',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xFF263238),
+                                    Text(
+                                      'Expenses',
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.grey,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              
-                            ],
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ],
                   ),
-                  const SizedBox(height: 24),
-                  const Text(
-                    'Calculated automatically from invoices, receipts, and logged expenses.',
-                    style: TextStyle(
-                      fontSize: 11,
-                      color: Colors.grey,
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Align(
-                    alignment: Alignment.bottomRight,
-                    child: Text(
-                      'Total Expenses £28,300',
-                      style: TextStyle(fontSize: 13, color: Color(0xFF455A64)),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-                        // Set Tex Button
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: () => context.push('/set-tax'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF1B3B36),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  elevation: 0,
                 ),
-                child: const Text(
-                  'Set Tex',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+              ],
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 32),
+
+            // Breakdown List
+            _buildBreakdownList(),
+
+            const SizedBox(height: 100), // Spacing for FAB
           ],
         ),
       ),
@@ -227,38 +301,106 @@ class PayOverviewPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSummaryCard(String title, String amount, Color color) {
+  Widget _buildIncomeCard({required String amount, required Color color}) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+      height: 100,
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        color: color,
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: const TextStyle(fontSize: 14, color: Colors.grey)),
-          const SizedBox(height: 12),
-          FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              amount,
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: color,
+          const Row(
+            children: [
+              Icon(Icons.trending_up, color: Colors.white, size: 16),
+              SizedBox(width: 4),
+              Text(
+                'Income',
+                style: TextStyle(color: Colors.white, fontSize: 13),
               ),
+            ],
+          ),
+          Text(
+            amount,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildExpenseCard({
+    required String amount,
+    required Color bgColor,
+    required Color textColor,
+  }) {
+    return Container(
+      height: 100,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.receipt_long, color: textColor, size: 16),
+              const SizedBox(width: 4),
+              Text(
+                'Expenses',
+                style: TextStyle(color: textColor, fontSize: 13),
+              ),
+            ],
+          ),
+          Text(
+            amount,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: textColor,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBar({
+    required String amount,
+    required double heightFactor,
+    required Color color,
+    required double availableHeight,
+  }) {
+    return Container(
+      width: 60, // Wider bar as per image
+      height: availableHeight * heightFactor,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(4), // Slightly rounded corners
+      ),
+    );
+  }
+
+  Widget _buildBreakdownList() {
+    return Column(
+      children: [
+        _buildLegendItem('Materials', '£9,260', const Color(0xFF6E8CB6)),
+        _buildLegendItem('Fuel', '£4,250', const Color(0xFFFFD54F)),
+        _buildLegendItem('Tools', '£2,400', const Color(0xFFB39DDB)),
+        _buildLegendItem('Mileage', '£2,180', const Color(0xFF80CBC4)),
+        _buildLegendItem('Subcontractors', '£3,900', const Color(0xFF6A8A82)),
+        _buildLegendItem('Other', '£1,470', const Color(0xFFE6C17B)),
+      ],
     );
   }
 
@@ -268,21 +410,20 @@ class PayOverviewPage extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 12,
-            height: 12,
+            width: 10,
+            height: 10,
             decoration: BoxDecoration(color: color, shape: BoxShape.circle),
           ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              label,
-              style: const TextStyle(fontSize: 13, color: Color(0xFF455A64)),
-            ),
+          const SizedBox(width: 12),
+          Text(
+            label,
+            style: const TextStyle(fontSize: 14, color: Color(0xFF455A64)),
           ),
+          const Spacer(),
           Text(
             amount,
             style: const TextStyle(
-              fontSize: 13,
+              fontSize: 14,
               fontWeight: FontWeight.bold,
               color: Color(0xFF263238),
             ),
@@ -301,13 +442,13 @@ class ChartData {
 
 class DonutChartPainter extends CustomPainter {
   final List<ChartData> data;
-  DonutChartPainter({required this.data});
+  final double strokeWidth;
+  DonutChartPainter({required this.data, this.strokeWidth = 35});
 
   @override
   void paint(Canvas canvas, Size size) {
     double total = data.fold(0, (sum, item) => sum + item.value);
     double startAngle = -math.pi / 2;
-    double strokeWidth = 35;
     final center = Offset(size.width / 2, size.height / 2);
     final radius = (size.width - strokeWidth) / 2;
 

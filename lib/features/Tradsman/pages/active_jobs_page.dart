@@ -12,7 +12,7 @@ class ActiveJobsPage extends StatelessWidget {
     const Color accentColor = Color(0xFFFDD835); // Yellow indicator
 
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: const CommonAppBar(
@@ -42,7 +42,6 @@ class ActiveJobsPage extends StatelessWidget {
                   fontSize: 14,
                 ),
                 tabs: [
-                  Tab(text: 'All'),
                   Tab(text: 'Active jobs'),
                   Tab(text: 'Pending'),
                   Tab(text: 'Completed jobs'),
@@ -54,7 +53,6 @@ class ActiveJobsPage extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  _buildJobsList('All'),
                   _buildJobsList('Active'),
                   _buildPendingJobsList(),
                   _buildJobsList('Completed'),
@@ -146,11 +144,7 @@ class ActiveJobsPage extends StatelessWidget {
               // Description
               const Text(
                 'Ceramic tile installation in kitchen, approximately 20 square meters.',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey,
-                  height: 1.4,
-                ),
+                style: TextStyle(fontSize: 14, color: Colors.grey, height: 1.4),
               ),
               const SizedBox(height: 12),
 
@@ -197,7 +191,8 @@ class ActiveJobsPage extends StatelessWidget {
                 child: Row(
                   children: [
                     const Icon(
-                      Icons.lock_outline, // Using lock icon as placeholder for bag/lock
+                      Icons
+                          .lock_outline, // Using lock icon as placeholder for bag/lock
                       color: Color(0xFF5D4037),
                       size: 20,
                     ),
@@ -231,10 +226,7 @@ class ActiveJobsPage extends StatelessWidget {
                   ),
                   child: const Text(
                     'View',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
