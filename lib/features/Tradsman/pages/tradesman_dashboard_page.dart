@@ -24,10 +24,7 @@ class TradesmanDashboardPage extends StatelessWidget {
             left: 0,
             right: 0,
             height: 300,
-            child: Image.asset(
-              AppAssets.trad2bg,
-              fit: BoxFit.cover,
-            ),
+            child: Image.asset(AppAssets.trad2bg, fit: BoxFit.cover),
           ),
 
           // Content
@@ -35,7 +32,6 @@ class TradesmanDashboardPage extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 220), // Expose some part of the image
-                
                 // Card System
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -74,121 +70,135 @@ class TradesmanDashboardPage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: Column(
-                          children: [
-                            // Row 1
-                            IntrinsicHeight(
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Expanded(
-                                    child: _buildDashboardItem(
-                                      title: 'Community Fund',
-                                      subtitle: 'Protection for tools, theft & disputes',
-                                      onTap: () => context.push('/community-fund'),
+                            children: [
+                              // Row 1
+                              IntrinsicHeight(
+                                child: Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    Expanded(
+                                      child: _buildDashboardItem(
+                                        title: 'Community Fund',
+                                        subtitle:
+                                            'Protection for tools, theft & disputes',
+                                        onTap: () =>
+                                            context.push('/community-fund'),
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(width: 16),
-                                  Expanded(
-                                    child: _buildDashboardItem(
-                                      title: 'Set Up Jobs',
-                                      onTap: () => context.push('/setup-jobs'),
+                                    const SizedBox(width: 16),
+                                    Expanded(
+                                      child: _buildDashboardItem(
+                                        title: 'Set Up Jobs',
+                                        onTap: () =>
+                                            context.push('/setup-jobs'),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 16),
+                              const SizedBox(height: 16),
 
-                            // Row 2
-                            IntrinsicHeight(
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Expanded(
-                                    child: _buildDashboardItem(
-                                      title: 'Calendar',
-                                      onTap: () => context.push('/calendar'),
+                              // Row 2
+                              IntrinsicHeight(
+                                child: Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    Expanded(
+                                      child: _buildDashboardItem(
+                                        title: 'Calendar',
+                                        onTap: () => context.push('/calendar'),
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(width: 16),
-                                  Expanded(
-                                    child: _buildDashboardItem(
-                                      title: 'Network Chat',
-                                      onTap: () => context.push('/trade-chat'), // Assuming route
+                                    const SizedBox(width: 16),
+                                    Expanded(
+                                      child: _buildDashboardItem(
+                                        title: 'Network Chat',
+                                        onTap: () => context.push(
+                                          '/trade-chat',
+                                        ), // Assuming route
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 16),
+                              const SizedBox(height: 16),
 
-                            // Row 3
-                            IntrinsicHeight(
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Expanded(
-                                    child: _buildDashboardItem(
-                                      title: 'Active Jobs',
-                                      badgeCount: 3,
-                                      badgeColor: const Color(0xFF556B2F), // Olive green
-                                      onTap: () => context.push('/active-jobs'),
+                              // Row 3
+                              IntrinsicHeight(
+                                child: Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    Expanded(
+                                      child: _buildDashboardItem(
+                                        title: 'Active Jobs',
+                                        badgeCount: 3,
+                                        badgeColor: const Color(
+                                          0xFF556B2F,
+                                        ), // Olive green
+                                        onTap: () =>
+                                            context.push('/active-jobs'),
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(width: 16),
-                                  Expanded(
-                                    child: _buildDashboardItem(
-                                      title: 'Completed Jobs',
-                                      badgeCount: 2,
-                                      badgeColor: primaryDarkColor,
-                                      onTap: () => context.push('/active-jobs'), // Usually same page with tab
+                                    const SizedBox(width: 16),
+                                    Expanded(
+                                      child: _buildDashboardItem(
+                                        title: 'Completed Jobs',
+                                        badgeCount: 2,
+                                        badgeColor: primaryDarkColor,
+                                        onTap: () => context.push(
+                                          '/active-jobs',
+                                        ), // Usually same page with tab
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 16),
+                              const SizedBox(height: 16),
 
-                            // Row 4
-                            IntrinsicHeight(
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Expanded(
-                                    child: _buildDashboardItem(
-                                      title: 'Mileage',
-                                      onTap: () => context.push('/mileage'),
+                              // Row 4
+                              IntrinsicHeight(
+                                child: Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    Expanded(
+                                      child: _buildDashboardItem(
+                                        title: 'Mileage',
+                                        onTap: () => context.push('/mileage'),
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(width: 16),
-                                  Expanded(
-                                    child: _buildDashboardItem(
-                                      title: 'Receipts',
-                                      onTap: () => context.push('/receipts'),
+                                    const SizedBox(width: 16),
+                                    Expanded(
+                                      child: _buildDashboardItem(
+                                        title: 'Receipts',
+                                        onTap: () => context.push('/receipts'),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 16),
+                              const SizedBox(height: 16),
 
-                            // Row 5
-                            SizedBox(
-                              width: double.infinity,
-                              child: _buildDashboardItem(
-                                title: 'Documents',
-                                // onTap: () => context.push('/documents'), // Placeholder
+                              // Row 5
+                              SizedBox(
+                                width: double.infinity,
+                                child: _buildDashboardItem(
+                                  title: 'Documents',
+                                  // onTap: () => context.push('/documents'), // Placeholder
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 40), // Bottom padding
-                          ],
+                              const SizedBox(height: 40), // Bottom padding
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
+                const SizedBox(height: 20),
               ],
             ),
           ),
@@ -198,7 +208,9 @@ class TradesmanDashboardPage extends StatelessWidget {
         () => BottomNavigationBar(
           currentIndex: controller.bottomNavIndex.value,
           onTap: (index) {
-            if (index == 4) {
+            if (index == 0) {
+              context.push('/find-jobs');
+            } else if (index == 4) {
               context.push('/profile');
             } else if (index == 2) {
               context.push('/invoices');
@@ -212,7 +224,7 @@ class TradesmanDashboardPage extends StatelessWidget {
           },
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.white,
-          selectedItemColor: primaryDarkColor,
+          selectedItemColor: Colors.grey,
           unselectedItemColor: Colors.grey,
           showUnselectedLabels: true,
           items: const [
@@ -319,4 +331,3 @@ class TradesmanDashboardPage extends StatelessWidget {
     );
   }
 }
-

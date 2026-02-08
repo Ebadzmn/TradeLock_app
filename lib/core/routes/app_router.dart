@@ -44,6 +44,8 @@ import 'package:tradelock_app/features/profile/pages/faq_page.dart';
 import 'package:tradelock_app/features/profile/pages/terms_conditions_page.dart';
 import 'package:tradelock_app/features/Tradsman/pages/pay_overview_page.dart';
 import 'package:tradelock_app/features/Tradsman/pages/rate_review_page.dart';
+import 'package:tradelock_app/features/Tradsman/pages/find_jobs_page.dart';
+import 'package:tradelock_app/features/Tradsman/pages/job_bidding_page.dart';
 
 import 'package:get/get.dart';
 
@@ -123,8 +125,8 @@ class AppRouter {
         builder: (context, state) => const ClientJobDetailsPage(),
       ),
       GoRoute(
-        path: "/client-pending-job-details" , 
-      builder: (context, state) => ClientPendingJobDetailsPage(),
+        path: "/client-pending-job-details",
+        builder: (context, state) => ClientPendingJobDetailsPage(),
       ),
       GoRoute(
         path: '/client-view-bids',
@@ -238,6 +240,14 @@ class AppRouter {
       GoRoute(
         path: '/rate-review',
         builder: (context, state) => const RateReviewPage(),
+      ),
+      GoRoute(
+        path: '/find-jobs',
+        builder: (context, state) => const FindJobsPage(),
+      ),
+      GoRoute(
+        path: '/job-bidding',
+        builder: (context, state) => const JobBiddingPage(),
       ),
     ],
   );
