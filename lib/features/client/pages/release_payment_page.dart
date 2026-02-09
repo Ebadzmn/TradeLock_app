@@ -20,149 +20,213 @@ class ReleasePaymentPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 10),
-              const Text(
-                'Secure payment Detail – Mrs Smith',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF1B3B36),
+              const Center(
+                child: Text(
+                  'Secure payment Detail – Mrs Smith',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF1B3B36),
+                  ),
                 ),
               ),
               const SizedBox(height: 8),
-              RichText(
-                text: const TextSpan(
-                  style: TextStyle(fontSize: 16, color: Color(0xFF1B3B36)),
-                  children: [
-                    TextSpan(
-                      text: '£1,500',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    TextSpan(text: ' of £3,000 locked in escrow'),
-                  ],
+              Center(
+                child: RichText(
+                  text: const TextSpan(
+                    style: TextStyle(fontSize: 18, color: Color(0xFF5D726F)),
+                    children: [
+                      TextSpan(
+                        text: '£1,500 ',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(text: 'of £3,000 locked in escrow'),
+                    ],
+                  ),
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 32),
 
               // Semicircle Chart
-              SizedBox(
-                height: 120,
-                width: 200,
-                child: Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: [
-                    CustomPaint(
-                      size: const Size(200, 100),
-                      painter: SemiCirclePainter(
-                        leftColor: yellowColor,
-                        rightColor: primaryDarkColor,
+              Center(
+                child: SizedBox(
+                  height: 140,
+                  width: 220,
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      CustomPaint(
+                        size: const Size(220, 110),
+                        painter: SemiCirclePainter(
+                          leftColor: yellowColor,
+                          rightColor: primaryDarkColor,
+                        ),
                       ),
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: const [
-                        Text(
-                          '50%',
-                          style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF1B3B36),
-                          ),
+                      Positioned(
+                        bottom: 10,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            Text(
+                              '50%',
+                              style: TextStyle(
+                                fontSize: 36,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF1B3B36),
+                              ),
+                            ),
+                            Text(
+                              'Released',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Color(0xFF5D726F),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          'Released',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
 
               // Linear Progress Bar
-              Container(
-                height: 8,
-                width: 280, // Approximate width
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          color: Color(0xFF1B3B36), // Dark Green
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(4),
-                            bottomLeft: Radius.circular(4),
+              Center(
+                child: Container(
+                  height: 12,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFB0BEC5).withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: Color(0xFF1B3B36),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(6),
+                              bottomLeft: Radius.circular(6),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.blueGrey[100], // Greyish
-                          borderRadius: const BorderRadius.only(
-                            topRight: Radius.circular(4),
-                            bottomRight: Radius.circular(4),
+                      const Spacer(flex: 1),
+                    ],
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 32),
+
+              // Remaining / Released Row
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Remaining',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF2C3E38),
                           ),
                         ),
-                      ),
+                        const SizedBox(height: 10),
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 18,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFE0E0E0),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Text(
+                            '£ 50',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF70889E),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Released',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF2C3E38),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 18,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFE0E0E0),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Text(
+                            '£ 150',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF70889E),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
 
-              const SizedBox(height: 40),
+              const SizedBox(height: 24),
 
-              // Step 1
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Amount to send:',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[800],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: '£',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(color: Colors.grey.shade300),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+              const Text(
+                'Available to release : £ 50',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1B3B36),
                 ),
               ),
               const SizedBox(height: 12),
               SizedBox(
                 width: double.infinity,
-                height: 48,
+                height: 54,
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryDarkColor,
+                    backgroundColor: const Color(0xFF32413C),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(10),
                     ),
+                    elevation: 0,
                   ),
                   child: const Text(
                     'Send Code',
@@ -175,42 +239,59 @@ class ReleasePaymentPage extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: 32),
 
-              // Step 2
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Step 2: My Code',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold, // Bold per mockup appearance
-                    color: Colors.grey[800],
-                  ),
+              const Text(
+                'amount',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1B3B36),
                 ),
               ),
               const SizedBox(height: 8),
               TextField(
                 decoration: InputDecoration(
-                  hintText: 'RU - 55V4', // Placeholder from image
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(color: Colors.grey.shade300),
+                  hintText: '£ 50',
+                  hintStyle: const TextStyle(
+                    color: Color(0xFF1B3B36),
+                    fontWeight: FontWeight.bold,
                   ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 16,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+              const Text(
+                'Available to release : £ 50',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1B3B36),
                 ),
               ),
               const SizedBox(height: 12),
               SizedBox(
                 width: double.infinity,
-                height: 48,
+                height: 54,
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryDarkColor,
+                    backgroundColor: const Color(0xFF32413C),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(10),
                     ),
+                    elevation: 0,
                   ),
                   child: const Text(
                     'Confirm & Release Payment',
@@ -223,22 +304,26 @@ class ReleasePaymentPage extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 24),
-              const Text(
-                'Time remaining 13:45',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF1B3B36),
+              const SizedBox(height: 32),
+              const Center(
+                child: Text(
+                  'Time remaining 13:45',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF1B3B36),
+                  ),
                 ),
               ),
-              const SizedBox(height: 8),
-              Text(
-                'Both codes must match to release payment.',
-                style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+              const SizedBox(height: 12),
+              const Center(
+                child: Text(
+                  'Both codes must match to release payment.',
+                  style: TextStyle(fontSize: 13, color: Color(0xFF434343)),
+                ),
               ),
 
-              const SizedBox(height: 60),
+              const SizedBox(height: 70),
             ],
           ),
         ),

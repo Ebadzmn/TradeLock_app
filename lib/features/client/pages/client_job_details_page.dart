@@ -73,8 +73,10 @@ class ClientJobDetailsPage extends StatelessWidget {
 
                 // Job Price Box
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 16,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFFF8FCFF),
                     borderRadius: BorderRadius.circular(12),
@@ -105,36 +107,13 @@ class ClientJobDetailsPage extends StatelessWidget {
                 // Action Buttons (Add Extras / Release Funds)
                 Row(
                   children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: 48,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFFEEEEEE),
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          child: const Text(
-                            'Add Extras',
-                            style: TextStyle(
-                              color: Color(0xFF1B3B36),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: SizedBox(
                         height: 48,
                         child: ElevatedButton(
                           onPressed: () {
-                            _showConfirmDialog(context);
+                            context.push('/release-payment');
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF2F3E38),
@@ -191,7 +170,10 @@ class ClientJobDetailsPage extends StatelessWidget {
                 ),
                 _buildDetailItem('Access', 'Ground floor, easy access.'),
                 _buildDetailItem('Parking', 'Street parking available.'),
-                _buildDetailItem('Disposal', 'Dispose of old tiles and debris.'),
+                _buildDetailItem(
+                  'Disposal',
+                  'Dispose of old tiles and debris.',
+                ),
                 _buildDetailItem(
                   'Materials',
                   'Light grey grout to be provided, tile adhesive supplied if needed.',
@@ -207,21 +189,8 @@ class ClientJobDetailsPage extends StatelessWidget {
               ],
             ),
           ),
+
           // Chat FAB at bottom right
-          Positioned(
-            right: 20,
-            bottom: 20,
-            child: FloatingActionButton(
-              onPressed: () {
-                // Handle chat tap
-              },
-              backgroundColor: const Color(0xFF03A9F4), // Light Blue
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Icon(Icons.send, color: Colors.white),
-            ),
-          ),
         ],
       ),
       floatingActionButton: CommonBottomHomeButton(
@@ -331,122 +300,6 @@ class ClientJobDetailsPage extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  void _showConfirmDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  'Confirm & Send',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF607D8B), // Blue-greyish color
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Additional Amount',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF5F7F9),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.grey.shade200),
-                  ),
-                  child: TextField(
-                    controller: TextEditingController(text: '£50.00'),
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 32),
-                Row(
-                  children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: 50,
-                        child: ElevatedButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFFF5F5F5),
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          child: const Text(
-                            'Cancel',
-                            style: TextStyle(
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: SizedBox(
-                        height: 50,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            context.push('/release-payment');
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF2F3E38),
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          child: const Text(
-                            'Confirm',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }
